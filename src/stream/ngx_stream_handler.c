@@ -348,6 +348,10 @@ ngx_stream_close_connection(ngx_connection_t *c)
     (void) ngx_atomic_fetch_add(ngx_stat_active, -1);
 #endif
 
+    if (c->server_active_count != NULL) {
+        (void) ngx_atomic_fetch_add(c->server_active_count, -1);
+    }
+
     pool = c->pool;
 
     ngx_close_connection(c);

@@ -189,6 +189,8 @@ struct ngx_connection_s {
 #if (NGX_THREADS || NGX_COMPAT)
     ngx_thread_task_t  *sendfile_task;
 #endif
+
+    ngx_atomic_t         *server_active_count;
 };
 
 

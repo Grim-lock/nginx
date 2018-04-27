@@ -3590,6 +3590,9 @@ ngx_http_close_connection(ngx_connection_t *c)
 #if (NGX_STAT_STUB)
     (void) ngx_atomic_fetch_add(ngx_stat_active, -1);
 #endif
+    if (c->server_active_count != NULL) {
+        (void) ngx_atomic_fetch_add(c->server_active_count, -1);
+    }
 
     c->destroyed = 1;
 
